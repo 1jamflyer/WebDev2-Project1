@@ -1,7 +1,7 @@
 import os
 from app import app, db
 from flask import render_template, request, redirect, url_for, flash
-from app.forms import UserProfile
+from app.forms import NewProfileForm
 from werkzeug.utils import secure_filename
 from app.models import User
 import psycopg2
@@ -29,23 +29,21 @@ def about():
 @app.route('/profile',methods=["GET", "POST"])
 def profile(): 
     """Add a new profile"""
-    form = UserProfile()
+    form = NewProfileForm()
     def new_profile():
-        form = UserProfile()
-
         if request.method == "POST" and form.validate_on_submit():
-            firstname = UserProfile.fname.data
-            lastname = UserProfile.lname.data
-            gender = UserProfile.gender.data
-            email = UserProfile.email.data
-            location = UserProfile.location.data
-            biography = UserProfile.biography.data
-            created_on = str(datetime.datetime.now()).split()[0]
+            firstname = form.firstname.data
+            lastname = form.lastname.data
+            gender = form.gender.data
+            email = form.email.data
+            location = form.location.data
+            bio = form.bio.data
+            created = str(datetime.datetime.now()).split()[0]
                 
-            photo = UserProfile.photo.data
+            photo = form.photo.data
             photo_name = secure_filename(photo.filename)
                 
-            user = User(firstname, lastname, gender, email, location, biography, created_on, photo_name)
+            user = User(firstname, lastname, gender, email, location, bio, created, photo_name)
                 
             db.session.add(user)
             db.session.commit()
@@ -67,7 +65,7 @@ def profiles():
     for user in User:
         profiles.append({"pro_pic": user.photo, "f_name":user.firstname, "l_name": user.lastname, "gender": user.gender, "location":user.location, "id":user.id})
     
-    return render_template("profile_lost.html", profiles = profiles)
+    return render_template("profile_list.html", profiles = profiles)
 
 @app.route('/profile/<userid>')
 def i_profile(userid):

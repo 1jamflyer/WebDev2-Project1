@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}" type="text/css" />
+<link rel="stylesheet" href="{{ url_for('static', filename='css/new_profile.css') }}" type="text/css" />
 {% endblock %}
 
 {% block main %}
@@ -9,33 +9,34 @@
 <div class="form-container border-style">
     <h1 id="page-title">Add Profile</h1> 
     <form method = "POST" action="{{ url_for('profile') }}" enctype="multipart/form-data">
+        {{newProfileForm.csrf_token}}
         <div class="containers">
-            {{UserProfile.fname.label(class="block")}}
-            {{UserProfile.fname(class="field col-md-8")}}
+            {{newProfileForm.firstname.label(class="block")}}
+            {{newProfileForm.firstname(class="field col-md-8")}}
         </div>
         <div class="containers">
-            {{UserProfile.lname.label(class="block")}}
-            {{UserProfile.lname(class="field col-md-8")}}
+            {{newProfileForm.lastname.label(class="block")}}
+            {{newProfileForm.lastname(class="field col-md-8")}}
         </div>
         <div class="containers">
-            {{UserProfile.gender.label(class="block")}}
-            {{UserProfile.gender(class="field col-md-8")}}
+            {{newProfileForm.gender.label(class="block")}}
+            {{newProfileForm.gender(class="field col-md-8")}}
         </div>
         <div class="containers">
-            {{UserProfile.email.label(class="block")}}
-            {{UserProfile.email(placeholder = "eg. example@example.com", class="field col-md-8")}}
+            {{newProfileForm.email.label(class="block")}}
+            {{newProfileForm.email(placeholder = "eg. example@example.com", class="field col-md-8")}}
         </div>
         <div class="containers">
-            {{UserProfile.location.label(class="block")}}
-            {{UserProfile.location(placeholder="eg. Spanish Town, Jamaica", class="field col-md-8")}}
+            {{newProfileForm.location.label(class="block")}}
+            {{newProfileForm.location(placeholder="eg. Kingston, Jamaica", class="field col-md-8")}}
         </div>
         <div class="containers">
-            {{UserProfile.biography.label(class="block")}}
-            {{UserProfile.biography(class="field col-md-8")}}
+            {{newProfileForm.bio.label(class="block")}}
+            {{newProfileForm.bio(class="field col-md-8")}}
         </div>
         <div class="containers">
-            {{UserProfile.photo.label(class="block")}}
-            {{UserProfile.photo(class="field col-md-8")}}
+            {{newProfileForm.photo.label(class="block")}}
+            {{newProfileForm.photo(class="field col-md-8")}}
         </div>
         <div class="containers">
             <input type="submit" value="Add Profile" class="btn btn-success"/>
