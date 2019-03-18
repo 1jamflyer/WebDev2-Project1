@@ -11,10 +11,6 @@ from sqlalchemy import exc
 #conn = psycopg2.connect("host=localhost dbname=UserProfiles user=project1")
 
 
-
-
- 
-
 @app.route('/')
 def home():
     """Render website's home page."""
