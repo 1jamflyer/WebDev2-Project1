@@ -28,12 +28,12 @@ def profile():
     form = NewProfileForm()
     def new_profile():
         if request.method == "POST" and form.validate_on_submit():
-            firstname = form.firstname.data
-            lastname = form.lastname.data
-            gender = form.gender.data
-            email = form.email.data
-            location = form.location.data
-            bio = form.bio.data
+            firstname = request.form["firstname"]
+            lastname = request.form["lastname"]
+            gender = request.form["Gender"]
+            email = request.form["Email"]
+            location = request.form["Location"]
+            bio = request.form["Biography"]
             created = str(datetime.datetime.now()).split()[0]
                 
             photo = form.photo.data
